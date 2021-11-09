@@ -6,13 +6,14 @@ import com.urcar.appliationurcar.publications.mapping.PostMapper;
 import com.urcar.appliationurcar.publications.resource.CreatePostResource;
 import com.urcar.appliationurcar.publications.resource.PostResource;
 import com.urcar.appliationurcar.publications.resource.UpdatePostResource;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Tag(name="Post")
 @RestController
 @RequestMapping("/api/v1/lessor/{lessorId}/post")
 public class PostController {

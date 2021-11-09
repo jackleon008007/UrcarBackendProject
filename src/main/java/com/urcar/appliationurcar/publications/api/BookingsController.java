@@ -1,18 +1,21 @@
 package com.urcar.appliationurcar.publications.api;
 
 
-import com.urcar.appliationurcar.publications.domain.service.CommentService;
+
 import com.urcar.appliationurcar.publications.domain.service.ReservationService;
-import com.urcar.appliationurcar.publications.mapping.CommentMapper;
+
 import com.urcar.appliationurcar.publications.mapping.ReservationMapper;
 import com.urcar.appliationurcar.publications.resource.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+@Tag(name="Post")
 @RestController
-@RequestMapping("/api/v1/post/{postId}/reservation")
+@RequestMapping("/api/v1/lessor/{lessorId}/post/{postId}/reservation")
 public class BookingsController {
     private final ReservationService reservationService;
     private final ReservationMapper mapper;

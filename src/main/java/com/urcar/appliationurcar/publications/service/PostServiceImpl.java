@@ -54,7 +54,7 @@ public class PostServiceImpl implements PostService {
         if(!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        //Title Uniqueness Validation
+
 
         Post postWithTitle = postRepository.findByTitle(post.getTitle());
 

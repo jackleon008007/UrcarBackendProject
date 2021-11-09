@@ -7,6 +7,7 @@ import com.urcar.appliationurcar.publications.domain.service.PostService;
 import com.urcar.appliationurcar.publications.mapping.CommentMapper;
 import com.urcar.appliationurcar.publications.mapping.PostMapper;
 import com.urcar.appliationurcar.publications.resource.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@Tag(name="Post")
 @RestController
 @RequestMapping("/api/v1/lessor/{lessorId}/post/{postId}/comment")
 public class CommentsController {
