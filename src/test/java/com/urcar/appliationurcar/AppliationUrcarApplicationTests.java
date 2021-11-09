@@ -8,6 +8,7 @@ class AppliationUrcarApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

@@ -3,10 +3,10 @@ package com.urcar.appliationurcar.publications.domain.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.urcar.appliationurcar.shared.domain.model.AuditModel;
 import com.urcar.appliationurcar.userAdministration.domain.model.entity.Lessor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -15,6 +15,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@With
 @Table(name="post")
 public class Post extends AuditModel {
 
@@ -23,29 +26,32 @@ public class Post extends AuditModel {
     private Long id;
 
     @NotNull
+    @NotBlank
     @Size(max=150)
     @Column(unique=true)
-    private String Title;
+    private String title;
 
     @ManyToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name="lessor_id",nullable=false)
+    @JoinColumn(name="lessor_id",nullable = false)
     @JsonIgnore
-    private Lessor lessorId;
+    private Lessor lessor;
 
     @NotNull
+    @NotBlank
     @Size(max=350)
-    private String Description;
+    private String description;
 
     @NotNull
-    private Long Price;
+    private Long price;
 
     @NotNull
-    private Long OwnerId;
+    private Long ownerId;
     /*image no founf*/;
 
     @NotNull
+    @NotBlank
     @Size(max=800)
-    private String Content;
+    private String content;
 
     @NotNull
     private Date fabricationYear;
@@ -54,6 +60,7 @@ public class Post extends AuditModel {
     private Long likes;
 
     @NotNull
+    @NotBlank
     @Size(max=200)
     private String modelCar;
 
@@ -64,10 +71,12 @@ public class Post extends AuditModel {
     private Long numberDoors;
 
     @NotNull
+    @NotBlank
     @Size(max=100)
     private String bootType;
 
     @NotNull
+    @NotBlank
     @Size(max=50)
     private String plate;
 

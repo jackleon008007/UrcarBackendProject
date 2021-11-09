@@ -1,6 +1,7 @@
 package com.urcar.appliationurcar.shared.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.urcar.appliationurcar.publications.domain.model.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,16 +17,16 @@ import java.util.Date;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value={"creatAt","updateAt"},allowGetters=true)
+@JsonIgnoreProperties(value = {"createAt", "updateAt"}, allowGetters = true)
 public abstract class AuditModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_at",nullable=false,updatable = false)
+    @Column(name="created_at", nullable = false, updatable = false)
     @CreatedDate
-    private Date createdAt;
+    private Date createAt;
+
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="updated_at",nullable=false)
-    @CreatedDate
+    @Column(name="updated_at", nullable = false)
     @LastModifiedDate
-    private Date updatedAt;
+    private Date updateAt;
 
 }

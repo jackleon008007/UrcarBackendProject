@@ -25,4 +25,8 @@ public class ResourceValidationException extends RuntimeException{
         super(String.format("Not all constraint satisfied for %s :%s",
                 resourceName,violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(". "))));
     }
+
+    public ResourceValidationException(String resourceName, String message) {
+        super(String.format("Not all constraints satisfied for %s: %s", resourceName, message));
+    }
 }
