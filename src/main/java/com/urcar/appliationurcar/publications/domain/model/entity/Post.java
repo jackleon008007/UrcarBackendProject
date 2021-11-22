@@ -80,4 +80,10 @@ public class Post extends AuditModel {
     @Size(max=50)
     private String plate;
 
+    @NotNull
+    @NotBlank
+    @Size(max=200)
+    private String imageurl;
+
+
 }

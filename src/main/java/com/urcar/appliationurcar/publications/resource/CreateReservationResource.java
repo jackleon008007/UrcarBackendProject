@@ -17,10 +17,13 @@ public class CreateReservationResource {
 
     @NotNull
     @Size(max=150)
-    private String Title;
+    private String title;
 
     @NotNull
-    private Long Price;
-
+    private Long price;
+    @NotNull
+    private Long leaseHolderId;
+    @NotNull
+    private Long lessorId;
 
 }

@@ -15,4 +15,8 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     Page<Reservation> findByPostId(Long postId, Pageable pageable);
     Optional<Reservation> findByIdAndPostId(Long id, Long postId);
 
+    List<Reservation> findByLessorId(Long lessorId);
+    List<Reservation> findByLeaseHolderId(Long leaseHolderId);
+    Reservation findByLessorIdAndLeaseHolderId(Long lessorId, Long leaseHolderId);
+
 }

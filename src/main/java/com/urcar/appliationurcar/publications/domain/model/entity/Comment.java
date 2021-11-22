@@ -36,4 +36,9 @@ public class Comment extends AuditModel {
     @JoinColumn(name="leaseHolder_id",nullable=false)
     @JsonIgnore
     private LeaseHolder leaseHolderId;
+
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name="lessor_id",nullable=false)
+    @JsonIgnore
+    private LeaseHolder lessorId;
 }

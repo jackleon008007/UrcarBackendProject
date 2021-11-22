@@ -5,6 +5,7 @@ import com.urcar.appliationurcar.userAdministration.domain.service.LeaseHolderSe
 import com.urcar.appliationurcar.userAdministration.mapping.LeaseHolderMapper;
 import com.urcar.appliationurcar.userAdministration.resource.CreateLeaseHolderResource;
 import com.urcar.appliationurcar.userAdministration.resource.LeaseHolderResource;
+import com.urcar.appliationurcar.userAdministration.resource.LessorResource;
 import com.urcar.appliationurcar.userAdministration.resource.UpdateLeaseHolderResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,10 @@ public class LeaseHolderController {
     @GetMapping("{leaseHolderId}")
     public LeaseHolderResource getLeaseHolderById(@PathVariable Long leaseHolderId){
         return mapper.toResource(leaseHolderService.getById(leaseHolderId));
+    }
+    @GetMapping("?/?=/{email}&&{password}")
+    public LeaseHolderResource getLeaseHolderById(@PathVariable String email, @RequestBody String password){
+        return mapper.toResource(leaseHolderService.finByEmailAndPassword(email,password));
     }
 
     @PostMapping(consumes="application/json")

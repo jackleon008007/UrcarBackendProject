@@ -15,4 +15,5 @@ public interface LessorService {
     Lessor create(Lessor lessor);
     Lessor update(Long lessorId, Lessor request);
     ResponseEntity<?> delete(Long lessorId);
+    Lessor finByEmailAndPassword(String email, String password);
 }

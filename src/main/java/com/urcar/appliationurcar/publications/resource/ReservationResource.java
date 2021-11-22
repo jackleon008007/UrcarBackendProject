@@ -17,8 +17,12 @@ public class ReservationResource {
 
     private Long id;
 
-    private String Title;
+    private String title;
 
-    private Long Price;
+    private Long price;
+
+    private Long leaseHolderId;
+
+    private Long lessorId;
 
 }

@@ -6,6 +6,9 @@ import com.urcar.appliationurcar.userAdministration.domain.model.entity.Lessor;
 import lombok.*;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -28,5 +31,6 @@ public class PostResource {
     private Long numberDoors;
     private String bootType;
     private String plate;
+    private String imageurl;
 
 }

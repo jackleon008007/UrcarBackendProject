@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name="Post")
 @RestController
-@RequestMapping("/api/v1/lessor/{lessorId}/post/{postId}/reservation")
+@RequestMapping("/api/v1/post/{postId}/reservation")
 public class BookingsController {
     private final ReservationService reservationService;
     private final ReservationMapper mapper;
@@ -28,7 +28,7 @@ public class BookingsController {
 
 
     @GetMapping
-    public Page<ReservationResource> getAllCommentByPostId(@PathVariable Long postId, Pageable pageable){
+    public Page<ReservationResource> getAllReservationByPostId(@PathVariable Long postId, Pageable pageable){
         return mapper.modelListToPage(reservationService.getAllByPostId(postId),pageable);
     }
 

@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -63,6 +64,11 @@ public class CreatePostResource {
     @NotNull
     @Size(max=50)
     private String plate;
+
+    @NotNull
+    @NotBlank
+    @Size(max=200)
+    private String imageurl;
 
 
 }

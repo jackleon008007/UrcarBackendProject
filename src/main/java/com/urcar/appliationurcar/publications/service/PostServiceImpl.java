@@ -54,12 +54,11 @@ public class PostServiceImpl implements PostService {
         if(!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-
-
         Post postWithTitle = postRepository.findByTitle(post.getTitle());
 
         if(postWithTitle != null)
             throw new ResourceValidationException(ENTITY,"A post with the same title already exists.");
+
 
         return lessorRepository.findById(lessoId).map(lessor->{
             post.setLessor(lessor);
@@ -78,7 +77,16 @@ public class PostServiceImpl implements PostService {
             return postRepository.findById(postId).map(
                     post-> postRepository.save(post.withTitle(request.getTitle())
                             .withDescription(request.getDescription())
-                            .withContent(request.getContent())))
+                            .withContent(request.getContent())
+                            .withBootType(request.getBootType())
+                            .withFabricationYear(request.getFabricationYear())
+                            .withImageurl(request.getImageurl())
+                            .withLikes(request.getLikes())
+                            .withModelCar(request.getModelCar())
+                            .withNumberDoors(request.getNumberDoors())
+                            .withNumberSeats(request.getNumberSeats())
+                            .withPlate(request.getPlate())
+                            .withPrice(request.getPrice())))
                     .orElseThrow(()-> new ResourceNotFoundException(ENTITY,postId));
     }
 

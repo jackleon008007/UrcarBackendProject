@@ -31,6 +31,10 @@ public class LessorController {
     public LessorResource getLessorById(@PathVariable Long lessorId){
         return mapper.toResource(lessorService.getById(lessorId));
     }
+    @GetMapping("/?=/{email}&&{password}")
+    public LessorResource getLessorById(@PathVariable String email,@PathVariable String password){
+        return mapper.toResource(lessorService.finByEmailAndPassword(email,password));
+    }
 
     @PostMapping(consumes= "application/json")
     public LessorResource createLessor(@RequestBody CreateLessorResource request){

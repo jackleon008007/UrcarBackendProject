@@ -89,4 +89,9 @@ public class LessorServiceImpl implements LessorService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,lessorId));
     }
+
+    @Override
+    public Lessor finByEmailAndPassword(String email, String password) {
+        return lessorRepository.findByEmailAndPassword(email,password);
+    }
 }

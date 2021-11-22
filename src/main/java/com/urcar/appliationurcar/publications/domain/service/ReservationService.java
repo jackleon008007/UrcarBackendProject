@@ -13,6 +13,9 @@ public interface ReservationService {
     Page<Reservation> getAllByPostId(Long postId,Pageable pageable);
     Reservation update(Long postId, Long reservationId, Reservation request);
     ResponseEntity<?> delete(Long postId, Long reservationId);
+    Reservation create(Long postId,Reservation reservation);
+    List<Reservation> getAllByLessorId(Long lessorId);
+    List<Reservation> getAllByLeasHolderId(Long leaseHolderId);
+    Reservation getByLessorIdAndLeaseHolderId(Long lessorId, Long leaseHolderId);
 
-    Reservation create(Long postId, Reservation request);
 }

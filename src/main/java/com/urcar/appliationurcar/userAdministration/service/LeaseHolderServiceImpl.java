@@ -92,4 +92,9 @@ public class LeaseHolderServiceImpl implements LeaseHolderService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,leaseHolderId));
     }
+
+    @Override
+    public LeaseHolder finByEmailAndPassword(String email, String password) {
+        return leaseHolderRepository.findByEmailAndPassword(email,password);
+    }
 }

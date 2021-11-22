@@ -5,6 +5,7 @@ import com.urcar.appliationurcar.userAdministration.domain.model.entity.Lessor;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -64,5 +65,8 @@ public class UpdatePostResource {
     @Size(max=50)
     private String plate;
 
-
+    @NotNull
+    @NotBlank
+    @Size(max=200)
+    private String imageurl;
 }

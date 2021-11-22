@@ -1,12 +1,14 @@
 package com.urcar.appliationurcar.publications.service;
 
-import com.urcar.appliationurcar.publications.domain.model.entity.Comment;
+import com.urcar.appliationurcar.publications.domain.model.entity.Post;
 import com.urcar.appliationurcar.publications.domain.model.entity.Reservation;
 import com.urcar.appliationurcar.publications.domain.persistence.PostRepository;
 import com.urcar.appliationurcar.publications.domain.persistence.ReservationRepository;
 import com.urcar.appliationurcar.publications.domain.service.ReservationService;
 import com.urcar.appliationurcar.shared.exception.ResourceNotFoundException;
 import com.urcar.appliationurcar.shared.exception.ResourceValidationException;
+import com.urcar.appliationurcar.userAdministration.domain.persistence.LeaseHolderRepository;
+import com.urcar.appliationurcar.userAdministration.domain.persistence.LessorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +25,13 @@ import java.util.Set;
 public class ReservationServiceImpl implements ReservationService {
 
 
-    private static final String ENTITY ="reservation";
+    private static final String ENTITY ="Reservation";
     private final PostRepository postRepository;
+
     private final Validator validator;
     private final ReservationRepository reservationRepository;
     public ReservationServiceImpl(PostRepository postRepository,
-                                  Validator validator, ReservationRepository reservationRepository){
+                                  LessorRepository lessorRepository, LeaseHolderRepository leaseHolderRepository, Validator validator, ReservationRepository reservationRepository){
         this.postRepository = postRepository;
         this.validator = validator;
         this.reservationRepository=reservationRepository;
@@ -56,7 +59,7 @@ public class ReservationServiceImpl implements ReservationService {
             throw new ResourceNotFoundException("Post",postId);
         }
         return reservationRepository.findById(reservationId).map(
-                        reservation-> reservationRepository.save(reservation.withLeaseHolder(request.getLeaseHolder())
+                        reservation-> reservationRepository.save(reservation
                                 .withPrice(request.getPrice()).withTitle(request.getTitle())))
                 .orElseThrow(()-> new ResourceNotFoundException(ENTITY,reservationId));
     }
@@ -72,14 +75,31 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional
-    public Reservation create(Long postId, Reservation request) {
-        Set<ConstraintViolation<Reservation>> violations = validator.validate(request);
-        if (!violations.isEmpty()) {
-            throw new ResourceValidationException(ENTITY,violations);
+    public Reservation create(Long postId, Reservation reservation) {
+        Set<ConstraintViolation<Reservation>> violations = validator.validate(reservation);
+
+        if(!violations.isEmpty()) {
+            throw new ResourceValidationException(ENTITY, violations);
         }
+
         return postRepository.findById(postId).map(post->{
-            request.setPost(post);
-            return reservationRepository.save(request);
+            reservation.setPost(post);
+            return reservationRepository.save(reservation);
         }).orElseThrow(()-> new ResourceNotFoundException("Post",postId));
+    }
+
+    @Override
+    public List<Reservation> getAllByLessorId(Long lessorId) {
+        return reservationRepository.findByLessorId(lessorId);
+    }
+
+    @Override
+    public List<Reservation> getAllByLeasHolderId(Long leaseHolderId) {
+        return reservationRepository.findByLeaseHolderId(leaseHolderId);
+    }
+
+    @Override
+    public Reservation getByLessorIdAndLeaseHolderId(Long lessorId, Long leaseHolderId) {
+        return reservationRepository.findByLessorIdAndLeaseHolderId(lessorId,leaseHolderId);
     }
 }

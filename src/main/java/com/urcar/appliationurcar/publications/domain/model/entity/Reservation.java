@@ -1,7 +1,9 @@
 package com.urcar.appliationurcar.publications.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.urcar.appliationurcar.shared.domain.model.AuditModel;
 import com.urcar.appliationurcar.userAdministration.domain.model.entity.LeaseHolder;
+import com.urcar.appliationurcar.userAdministration.domain.model.entity.Lessor;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,19 +25,20 @@ public class Reservation extends AuditModel {
 
     @NotNull
     @Size(max=150)
-    private String Title;
+    private String title;
 
     @NotNull
-    private Long Price;
+    private Long price;
 
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    @NotNull
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name="post_id",nullable = false)
+    @JsonIgnore
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "lease_holder_id")
-    private LeaseHolder leaseHolder;
+    @NotNull
+    private Long leaseHolderId;
+    @NotNull
+    private Long lessorId;
 
 }
